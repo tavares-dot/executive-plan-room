@@ -32,7 +32,7 @@ function WarRoom() {
   return (
     <>
       <PageHeader
-        eyebrow={<span className="inline-flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-destructive animate-pulse" />Ao vivo</span> as any}
+        eyebrow="Ao vivo"
         title="War Room"
         subtitle="Sala de comando comercial. Receita, gap e funil em tempo real."
         actions={<div className="flex items-center gap-2 text-xs text-muted-foreground"><Radio className="h-4 w-4" />Atualização contínua</div>}
