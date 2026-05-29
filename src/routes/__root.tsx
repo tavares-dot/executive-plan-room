@@ -8,7 +8,10 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { PlanProvider } from "../lib/plan-store";
+import { MeetingModeProvider, useMeetingMode } from "../lib/meeting-mode";
 import { AppSidebar } from "../components/AppSidebar";
+import { Scoreboard } from "../components/Scoreboard";
+import { TopBar } from "../components/TopBar";
 
 function NotFoundComponent() {
   return (
@@ -69,19 +72,30 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+function Shell() {
+  const { meeting } = useMeetingMode();
+  return (
+    <div className="min-h-screen bg-background">
+      {!meeting && <AppSidebar />}
+      <main className={`${meeting ? "ml-0" : "md:ml-64"} min-h-screen flex flex-col`}>
+        {!meeting && <TopBar />}
+        <Scoreboard />
+        <div className={`max-w-[1400px] mx-auto w-full px-6 ${meeting ? "md:px-16 py-10 md:py-14" : "md:px-10 py-8 md:py-12"}`}>
+          <Outlet />
+        </div>
+      </main>
+    </div>
+  );
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
       <PlanProvider>
-        <div className="min-h-screen bg-background">
-          <AppSidebar />
-          <main className="md:ml-64 min-h-screen">
-            <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-8 md:py-12">
-              <Outlet />
-            </div>
-          </main>
-        </div>
+        <MeetingModeProvider>
+          <Shell />
+        </MeetingModeProvider>
       </PlanProvider>
     </QueryClientProvider>
   );
