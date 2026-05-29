@@ -9,8 +9,80 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WarRoomRouteImport } from './routes/war-room'
+import { Route as SdrsRouteImport } from './routes/sdrs'
+import { Route as S4RouteImport } from './routes/s4'
+import { Route as S3RouteImport } from './routes/s3'
+import { Route as S2RouteImport } from './routes/s2'
+import { Route as S1RouteImport } from './routes/s1'
+import { Route as RituaisRouteImport } from './routes/rituais'
+import { Route as ReceitaRouteImport } from './routes/receita'
+import { Route as MetaJunhoRouteImport } from './routes/meta-junho'
+import { Route as IndicadoresRouteImport } from './routes/indicadores'
+import { Route as ForecastRouteImport } from './routes/forecast'
+import { Route as ClosersRouteImport } from './routes/closers'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WarRoomRoute = WarRoomRouteImport.update({
+  id: '/war-room',
+  path: '/war-room',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SdrsRoute = SdrsRouteImport.update({
+  id: '/sdrs',
+  path: '/sdrs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const S4Route = S4RouteImport.update({
+  id: '/s4',
+  path: '/s4',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const S3Route = S3RouteImport.update({
+  id: '/s3',
+  path: '/s3',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const S2Route = S2RouteImport.update({
+  id: '/s2',
+  path: '/s2',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const S1Route = S1RouteImport.update({
+  id: '/s1',
+  path: '/s1',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RituaisRoute = RituaisRouteImport.update({
+  id: '/rituais',
+  path: '/rituais',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReceitaRoute = ReceitaRouteImport.update({
+  id: '/receita',
+  path: '/receita',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MetaJunhoRoute = MetaJunhoRouteImport.update({
+  id: '/meta-junho',
+  path: '/meta-junho',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndicadoresRoute = IndicadoresRouteImport.update({
+  id: '/indicadores',
+  path: '/indicadores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForecastRoute = ForecastRouteImport.update({
+  id: '/forecast',
+  path: '/forecast',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClosersRoute = ClosersRouteImport.update({
+  id: '/closers',
+  path: '/closers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +91,200 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/closers': typeof ClosersRoute
+  '/forecast': typeof ForecastRoute
+  '/indicadores': typeof IndicadoresRoute
+  '/meta-junho': typeof MetaJunhoRoute
+  '/receita': typeof ReceitaRoute
+  '/rituais': typeof RituaisRoute
+  '/s1': typeof S1Route
+  '/s2': typeof S2Route
+  '/s3': typeof S3Route
+  '/s4': typeof S4Route
+  '/sdrs': typeof SdrsRoute
+  '/war-room': typeof WarRoomRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/closers': typeof ClosersRoute
+  '/forecast': typeof ForecastRoute
+  '/indicadores': typeof IndicadoresRoute
+  '/meta-junho': typeof MetaJunhoRoute
+  '/receita': typeof ReceitaRoute
+  '/rituais': typeof RituaisRoute
+  '/s1': typeof S1Route
+  '/s2': typeof S2Route
+  '/s3': typeof S3Route
+  '/s4': typeof S4Route
+  '/sdrs': typeof SdrsRoute
+  '/war-room': typeof WarRoomRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/closers': typeof ClosersRoute
+  '/forecast': typeof ForecastRoute
+  '/indicadores': typeof IndicadoresRoute
+  '/meta-junho': typeof MetaJunhoRoute
+  '/receita': typeof ReceitaRoute
+  '/rituais': typeof RituaisRoute
+  '/s1': typeof S1Route
+  '/s2': typeof S2Route
+  '/s3': typeof S3Route
+  '/s4': typeof S4Route
+  '/sdrs': typeof SdrsRoute
+  '/war-room': typeof WarRoomRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/closers'
+    | '/forecast'
+    | '/indicadores'
+    | '/meta-junho'
+    | '/receita'
+    | '/rituais'
+    | '/s1'
+    | '/s2'
+    | '/s3'
+    | '/s4'
+    | '/sdrs'
+    | '/war-room'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/closers'
+    | '/forecast'
+    | '/indicadores'
+    | '/meta-junho'
+    | '/receita'
+    | '/rituais'
+    | '/s1'
+    | '/s2'
+    | '/s3'
+    | '/s4'
+    | '/sdrs'
+    | '/war-room'
+  id:
+    | '__root__'
+    | '/'
+    | '/closers'
+    | '/forecast'
+    | '/indicadores'
+    | '/meta-junho'
+    | '/receita'
+    | '/rituais'
+    | '/s1'
+    | '/s2'
+    | '/s3'
+    | '/s4'
+    | '/sdrs'
+    | '/war-room'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ClosersRoute: typeof ClosersRoute
+  ForecastRoute: typeof ForecastRoute
+  IndicadoresRoute: typeof IndicadoresRoute
+  MetaJunhoRoute: typeof MetaJunhoRoute
+  ReceitaRoute: typeof ReceitaRoute
+  RituaisRoute: typeof RituaisRoute
+  S1Route: typeof S1Route
+  S2Route: typeof S2Route
+  S3Route: typeof S3Route
+  S4Route: typeof S4Route
+  SdrsRoute: typeof SdrsRoute
+  WarRoomRoute: typeof WarRoomRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/war-room': {
+      id: '/war-room'
+      path: '/war-room'
+      fullPath: '/war-room'
+      preLoaderRoute: typeof WarRoomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sdrs': {
+      id: '/sdrs'
+      path: '/sdrs'
+      fullPath: '/sdrs'
+      preLoaderRoute: typeof SdrsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/s4': {
+      id: '/s4'
+      path: '/s4'
+      fullPath: '/s4'
+      preLoaderRoute: typeof S4RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/s3': {
+      id: '/s3'
+      path: '/s3'
+      fullPath: '/s3'
+      preLoaderRoute: typeof S3RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/s2': {
+      id: '/s2'
+      path: '/s2'
+      fullPath: '/s2'
+      preLoaderRoute: typeof S2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/s1': {
+      id: '/s1'
+      path: '/s1'
+      fullPath: '/s1'
+      preLoaderRoute: typeof S1RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rituais': {
+      id: '/rituais'
+      path: '/rituais'
+      fullPath: '/rituais'
+      preLoaderRoute: typeof RituaisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/receita': {
+      id: '/receita'
+      path: '/receita'
+      fullPath: '/receita'
+      preLoaderRoute: typeof ReceitaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/meta-junho': {
+      id: '/meta-junho'
+      path: '/meta-junho'
+      fullPath: '/meta-junho'
+      preLoaderRoute: typeof MetaJunhoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/indicadores': {
+      id: '/indicadores'
+      path: '/indicadores'
+      fullPath: '/indicadores'
+      preLoaderRoute: typeof IndicadoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forecast': {
+      id: '/forecast'
+      path: '/forecast'
+      fullPath: '/forecast'
+      preLoaderRoute: typeof ForecastRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/closers': {
+      id: '/closers'
+      path: '/closers'
+      fullPath: '/closers'
+      preLoaderRoute: typeof ClosersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,17 +297,19 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ClosersRoute: ClosersRoute,
+  ForecastRoute: ForecastRoute,
+  IndicadoresRoute: IndicadoresRoute,
+  MetaJunhoRoute: MetaJunhoRoute,
+  ReceitaRoute: ReceitaRoute,
+  RituaisRoute: RituaisRoute,
+  S1Route: S1Route,
+  S2Route: S2Route,
+  S3Route: S3Route,
+  S4Route: S4Route,
+  SdrsRoute: SdrsRoute,
+  WarRoomRoute: WarRoomRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
