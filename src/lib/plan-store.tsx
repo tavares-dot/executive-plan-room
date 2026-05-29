@@ -8,6 +8,7 @@ export interface SprintData {
   metaReceita: number;
   metaSDR: number;
   metaClosers: number;
+  status: SprintStatus;
   checklist: { id: string; label: string; status: SprintStatus }[];
 }
 
@@ -36,11 +37,20 @@ export interface CloserData {
 
 export interface RitualItem { id: string; nome: string; horario: string; feito: boolean; }
 
+export type ActionStatus = "Não iniciado" | "Em andamento" | "Concluído";
+export interface ActionItem { id: string; titulo: string; responsavel: string; prazo: string; status: ActionStatus; }
+
+export type RiskLevel = "green" | "yellow" | "orange" | "red";
+export interface RiskCard { id: string; nivel: RiskLevel; titulo: string; observacao: string; }
+
+export interface CalendarioCell { base: string; sprint: "S1" | "S2" | "S3" | "S4"; valor: number; }
+
 export interface PlanState {
   home: {
     metaReceita: number;
     receitaRealizada: number;
     forecast: number;
+    comprometido: number;
     reunioes: number;
     fechamentos: number;
     ticketMedio: number;
@@ -63,6 +73,9 @@ export interface PlanState {
     receita: { id: string; nome: string; meta: number; atual: number }[];
   };
   forecast: { commit: number; bestCase: number; pipeline: number; gap: number; receitaPrevista: number };
+  calendario: CalendarioCell[];
+  proximasAcoes: ActionItem[];
+  riscos: RiskCard[];
 }
 
 const mkSprint = (objetivo: string, base: { label: string; value: number }[]): SprintData => ({
@@ -71,6 +84,7 @@ const mkSprint = (objetivo: string, base: { label: string; value: number }[]): S
   metaReceita: 162500,
   metaSDR: 40,
   metaClosers: 8,
+  status: "Não iniciado",
   checklist: [
     { id: "1", label: "Lista trabalhada e validada", status: "Não iniciado" },
     { id: "2", label: "Cadência de prospecção ativa", status: "Não iniciado" },
@@ -80,11 +94,15 @@ const mkSprint = (objetivo: string, base: { label: string; value: number }[]): S
   ],
 });
 
+const BASES = ["Maio", "Abril", "Março", "Fevereiro", "Janeiro", "Leads Novos"] as const;
+const SPRINTS = ["S1", "S2", "S3", "S4"] as const;
+
 const DEFAULT: PlanState = {
   home: {
     metaReceita: 650000,
     receitaRealizada: 0,
     forecast: 0,
+    comprometido: 0,
     reunioes: 0,
     fechamentos: 0,
     ticketMedio: 18000,
@@ -190,9 +208,24 @@ const DEFAULT: PlanState = {
     ],
   },
   forecast: { commit: 0, bestCase: 0, pipeline: 0, gap: 0, receitaPrevista: 0 },
+  calendario: BASES.flatMap((base) =>
+    SPRINTS.map((sprint) => ({ base, sprint, valor: 0 })),
+  ),
+  proximasAcoes: [
+    { id: "a1", titulo: "Validar lista de Maio com SDRs", responsavel: "Head Comercial", prazo: "S1", status: "Não iniciado" },
+    { id: "a2", titulo: "Revisar propostas em aberto > 7 dias", responsavel: "Closers", prazo: "S1", status: "Não iniciado" },
+    { id: "a3", titulo: "Reativar base Março com cadência nova", responsavel: "SDRs", prazo: "S2", status: "Não iniciado" },
+    { id: "a4", titulo: "Checkpoint de forecast com diretoria", responsavel: "Head Comercial", prazo: "S3", status: "Não iniciado" },
+  ],
+  riscos: [
+    { id: "rk1", nivel: "green", titulo: "Geração de Leads", observacao: "Volume dentro do esperado." },
+    { id: "rk2", nivel: "yellow", titulo: "Taxa de Conexão", observacao: "Monitorar cadência de SDRs." },
+    { id: "rk3", nivel: "orange", titulo: "Comparecimento em Reuniões", observacao: "No-show acima da média histórica." },
+    { id: "rk4", nivel: "red", titulo: "Taxa de Fechamento", observacao: "Pipeline maduro abaixo do necessário para meta." },
+  ],
 };
 
-const STORAGE_KEY = "legacy.plano.junho.2026";
+const STORAGE_KEY = "legacy.plano.junho.2026.v2";
 
 type Ctx = {
   state: PlanState;
@@ -208,7 +241,23 @@ export function PlanProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) setRaw({ ...DEFAULT, ...JSON.parse(raw) });
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        setRaw({
+          ...DEFAULT,
+          ...parsed,
+          home: { ...DEFAULT.home, ...(parsed.home || {}) },
+          sprints: {
+            S1: { ...DEFAULT.sprints.S1, ...(parsed.sprints?.S1 || {}) },
+            S2: { ...DEFAULT.sprints.S2, ...(parsed.sprints?.S2 || {}) },
+            S3: { ...DEFAULT.sprints.S3, ...(parsed.sprints?.S3 || {}) },
+            S4: { ...DEFAULT.sprints.S4, ...(parsed.sprints?.S4 || {}) },
+          },
+          calendario: parsed.calendario?.length ? parsed.calendario : DEFAULT.calendario,
+          proximasAcoes: parsed.proximasAcoes ?? DEFAULT.proximasAcoes,
+          riscos: parsed.riscos ?? DEFAULT.riscos,
+        });
+      }
     } catch {}
   }, []);
 
