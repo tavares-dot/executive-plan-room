@@ -153,3 +153,10 @@
   }
   .num-tabular { font-variant-numeric: tabular-nums; }
 }
+
+/* Modo Reunião — amplia KPIs, títulos e gráficos para apresentação */
+html.meeting-mode body { font-size: 17px; }
+html.meeting-mode h1 { font-size: 2.75rem; }
+html.meeting-mode h2 { font-size: 1.05rem; }
+html.meeting-mode h3 { font-size: 1.35rem; }
+html.meeting-mode .recharts-responsive-container { min-height: 360px; }
