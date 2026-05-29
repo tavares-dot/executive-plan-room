@@ -5,7 +5,8 @@ import {
   TrendingUp, Repeat, Gauge, LineChart,
 } from "lucide-react";
 
-const nav = [
+type NavItem = { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean };
+const nav: NavItem[] = [
   { to: "/", label: "Resumo Executivo", icon: LayoutDashboard, exact: true },
   { to: "/meta-junho", label: "Meta Junho", icon: Target },
   { to: "/war-room", label: "War Room", icon: Radio },
@@ -19,7 +20,7 @@ const nav = [
   { to: "/rituais", label: "Rituais", icon: Repeat },
   { to: "/indicadores", label: "Indicadores", icon: Gauge },
   { to: "/forecast", label: "Forecast", icon: LineChart },
-] as const;
+];
 
 export function AppSidebar() {
   const path = useRouterState({ select: (r) => r.location.pathname });
