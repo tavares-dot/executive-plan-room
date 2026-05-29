@@ -10,22 +10,31 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WarRoomRouteImport } from './routes/war-room'
+import { Route as SprintsRouteImport } from './routes/sprints'
 import { Route as SdrsRouteImport } from './routes/sdrs'
 import { Route as S4RouteImport } from './routes/s4'
 import { Route as S3RouteImport } from './routes/s3'
 import { Route as S2RouteImport } from './routes/s2'
 import { Route as S1RouteImport } from './routes/s1'
 import { Route as RituaisRouteImport } from './routes/rituais'
+import { Route as RiscosRouteImport } from './routes/riscos'
 import { Route as ReceitaRouteImport } from './routes/receita'
 import { Route as MetaJunhoRouteImport } from './routes/meta-junho'
 import { Route as IndicadoresRouteImport } from './routes/indicadores'
 import { Route as ForecastRouteImport } from './routes/forecast'
 import { Route as ClosersRouteImport } from './routes/closers'
+import { Route as CalendarioRouteImport } from './routes/calendario'
+import { Route as AcoesRouteImport } from './routes/acoes'
 import { Route as IndexRouteImport } from './routes/index'
 
 const WarRoomRoute = WarRoomRouteImport.update({
   id: '/war-room',
   path: '/war-room',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SprintsRoute = SprintsRouteImport.update({
+  id: '/sprints',
+  path: '/sprints',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SdrsRoute = SdrsRouteImport.update({
@@ -58,6 +67,11 @@ const RituaisRoute = RituaisRouteImport.update({
   path: '/rituais',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RiscosRoute = RiscosRouteImport.update({
+  id: '/riscos',
+  path: '/riscos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReceitaRoute = ReceitaRouteImport.update({
   id: '/receita',
   path: '/receita',
@@ -83,6 +97,16 @@ const ClosersRoute = ClosersRouteImport.update({
   path: '/closers',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CalendarioRoute = CalendarioRouteImport.update({
+  id: '/calendario',
+  path: '/calendario',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcoesRoute = AcoesRouteImport.update({
+  id: '/acoes',
+  path: '/acoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -91,111 +115,139 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/acoes': typeof AcoesRoute
+  '/calendario': typeof CalendarioRoute
   '/closers': typeof ClosersRoute
   '/forecast': typeof ForecastRoute
   '/indicadores': typeof IndicadoresRoute
   '/meta-junho': typeof MetaJunhoRoute
   '/receita': typeof ReceitaRoute
+  '/riscos': typeof RiscosRoute
   '/rituais': typeof RituaisRoute
   '/s1': typeof S1Route
   '/s2': typeof S2Route
   '/s3': typeof S3Route
   '/s4': typeof S4Route
   '/sdrs': typeof SdrsRoute
+  '/sprints': typeof SprintsRoute
   '/war-room': typeof WarRoomRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/acoes': typeof AcoesRoute
+  '/calendario': typeof CalendarioRoute
   '/closers': typeof ClosersRoute
   '/forecast': typeof ForecastRoute
   '/indicadores': typeof IndicadoresRoute
   '/meta-junho': typeof MetaJunhoRoute
   '/receita': typeof ReceitaRoute
+  '/riscos': typeof RiscosRoute
   '/rituais': typeof RituaisRoute
   '/s1': typeof S1Route
   '/s2': typeof S2Route
   '/s3': typeof S3Route
   '/s4': typeof S4Route
   '/sdrs': typeof SdrsRoute
+  '/sprints': typeof SprintsRoute
   '/war-room': typeof WarRoomRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/acoes': typeof AcoesRoute
+  '/calendario': typeof CalendarioRoute
   '/closers': typeof ClosersRoute
   '/forecast': typeof ForecastRoute
   '/indicadores': typeof IndicadoresRoute
   '/meta-junho': typeof MetaJunhoRoute
   '/receita': typeof ReceitaRoute
+  '/riscos': typeof RiscosRoute
   '/rituais': typeof RituaisRoute
   '/s1': typeof S1Route
   '/s2': typeof S2Route
   '/s3': typeof S3Route
   '/s4': typeof S4Route
   '/sdrs': typeof SdrsRoute
+  '/sprints': typeof SprintsRoute
   '/war-room': typeof WarRoomRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/acoes'
+    | '/calendario'
     | '/closers'
     | '/forecast'
     | '/indicadores'
     | '/meta-junho'
     | '/receita'
+    | '/riscos'
     | '/rituais'
     | '/s1'
     | '/s2'
     | '/s3'
     | '/s4'
     | '/sdrs'
+    | '/sprints'
     | '/war-room'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/acoes'
+    | '/calendario'
     | '/closers'
     | '/forecast'
     | '/indicadores'
     | '/meta-junho'
     | '/receita'
+    | '/riscos'
     | '/rituais'
     | '/s1'
     | '/s2'
     | '/s3'
     | '/s4'
     | '/sdrs'
+    | '/sprints'
     | '/war-room'
   id:
     | '__root__'
     | '/'
+    | '/acoes'
+    | '/calendario'
     | '/closers'
     | '/forecast'
     | '/indicadores'
     | '/meta-junho'
     | '/receita'
+    | '/riscos'
     | '/rituais'
     | '/s1'
     | '/s2'
     | '/s3'
     | '/s4'
     | '/sdrs'
+    | '/sprints'
     | '/war-room'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AcoesRoute: typeof AcoesRoute
+  CalendarioRoute: typeof CalendarioRoute
   ClosersRoute: typeof ClosersRoute
   ForecastRoute: typeof ForecastRoute
   IndicadoresRoute: typeof IndicadoresRoute
   MetaJunhoRoute: typeof MetaJunhoRoute
   ReceitaRoute: typeof ReceitaRoute
+  RiscosRoute: typeof RiscosRoute
   RituaisRoute: typeof RituaisRoute
   S1Route: typeof S1Route
   S2Route: typeof S2Route
   S3Route: typeof S3Route
   S4Route: typeof S4Route
   SdrsRoute: typeof SdrsRoute
+  SprintsRoute: typeof SprintsRoute
   WarRoomRoute: typeof WarRoomRoute
 }
 
@@ -206,6 +258,13 @@ declare module '@tanstack/react-router' {
       path: '/war-room'
       fullPath: '/war-room'
       preLoaderRoute: typeof WarRoomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sprints': {
+      id: '/sprints'
+      path: '/sprints'
+      fullPath: '/sprints'
+      preLoaderRoute: typeof SprintsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sdrs': {
@@ -250,6 +309,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RituaisRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/riscos': {
+      id: '/riscos'
+      path: '/riscos'
+      fullPath: '/riscos'
+      preLoaderRoute: typeof RiscosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/receita': {
       id: '/receita'
       path: '/receita'
@@ -285,6 +351,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClosersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/calendario': {
+      id: '/calendario'
+      path: '/calendario'
+      fullPath: '/calendario'
+      preLoaderRoute: typeof CalendarioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/acoes': {
+      id: '/acoes'
+      path: '/acoes'
+      fullPath: '/acoes'
+      preLoaderRoute: typeof AcoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -297,17 +377,21 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AcoesRoute: AcoesRoute,
+  CalendarioRoute: CalendarioRoute,
   ClosersRoute: ClosersRoute,
   ForecastRoute: ForecastRoute,
   IndicadoresRoute: IndicadoresRoute,
   MetaJunhoRoute: MetaJunhoRoute,
   ReceitaRoute: ReceitaRoute,
+  RiscosRoute: RiscosRoute,
   RituaisRoute: RituaisRoute,
   S1Route: S1Route,
   S2Route: S2Route,
   S3Route: S3Route,
   S4Route: S4Route,
   SdrsRoute: SdrsRoute,
+  SprintsRoute: SprintsRoute,
   WarRoomRoute: WarRoomRoute,
 }
 export const routeTree = rootRouteImport
