@@ -76,6 +76,31 @@ export interface PlanState {
   calendario: CalendarioCell[];
   proximasAcoes: ActionItem[];
   riscos: RiskCard[];
+  sdrEntries: SDREntry[];
+  closerEntries: CloserEntry[];
+  fechamentos: FechamentoDia[];
+  sprintTargets: Record<SprintKey, SprintTarget>;
+  checkpoint13: { meta: number; realizado: number; contratosEsperados: number; contratosRealizados: number };
+}
+
+export type SprintKey = "S1" | "S2" | "S3" | "S4";
+
+export interface SDREntry {
+  id: string; date: string; sdrId: string; sprint: SprintKey;
+  tentativas: number; conexoes: number; agendamentos: number;
+  reunioes: number; noShow: number; obs: string;
+}
+export interface CloserEntry {
+  id: string; date: string; closerId: string; sprint: SprintKey;
+  reunioes: number; negociacoes: number; vendas: number;
+  valorVendido: number; perdidos: number; noShow: number; obs: string;
+}
+export interface FechamentoDia {
+  date: string; resultado: string; gargalos: string; aprendizado: string;
+  ajustes: string; responsavel: string; prazo: string;
+}
+export interface SprintTarget {
+  receita: number; contratos: number; reunioes: number; negociacoes: number; agendamentos: number;
 }
 
 const mkSprint = (objetivo: string, base: { label: string; value: number }[]): SprintData => ({
