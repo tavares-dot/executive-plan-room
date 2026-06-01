@@ -292,6 +292,11 @@ export function PlanProvider({ children }: { children: ReactNode }) {
           calendario: parsed.calendario?.length ? parsed.calendario : DEFAULT.calendario,
           proximasAcoes: parsed.proximasAcoes ?? DEFAULT.proximasAcoes,
           riscos: parsed.riscos ?? DEFAULT.riscos,
+          sdrEntries: parsed.sdrEntries ?? DEFAULT.sdrEntries,
+          closerEntries: parsed.closerEntries ?? DEFAULT.closerEntries,
+          fechamentos: parsed.fechamentos ?? DEFAULT.fechamentos,
+          sprintTargets: { ...DEFAULT.sprintTargets, ...(parsed.sprintTargets || {}) },
+          checkpoint13: { ...DEFAULT.checkpoint13, ...(parsed.checkpoint13 || {}) },
         });
       }
     } catch {}
