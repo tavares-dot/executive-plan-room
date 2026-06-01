@@ -22,6 +22,7 @@ import { Route as ReceitaRouteImport } from './routes/receita'
 import { Route as MetaJunhoRouteImport } from './routes/meta-junho'
 import { Route as IndicadoresRouteImport } from './routes/indicadores'
 import { Route as ForecastRouteImport } from './routes/forecast'
+import { Route as CockpitRouteImport } from './routes/cockpit'
 import { Route as ClosersRouteImport } from './routes/closers'
 import { Route as CalendarioRouteImport } from './routes/calendario'
 import { Route as AcoesRouteImport } from './routes/acoes'
@@ -92,6 +93,11 @@ const ForecastRoute = ForecastRouteImport.update({
   path: '/forecast',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CockpitRoute = CockpitRouteImport.update({
+  id: '/cockpit',
+  path: '/cockpit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ClosersRoute = ClosersRouteImport.update({
   id: '/closers',
   path: '/closers',
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/acoes': typeof AcoesRoute
   '/calendario': typeof CalendarioRoute
   '/closers': typeof ClosersRoute
+  '/cockpit': typeof CockpitRoute
   '/forecast': typeof ForecastRoute
   '/indicadores': typeof IndicadoresRoute
   '/meta-junho': typeof MetaJunhoRoute
@@ -137,6 +144,7 @@ export interface FileRoutesByTo {
   '/acoes': typeof AcoesRoute
   '/calendario': typeof CalendarioRoute
   '/closers': typeof ClosersRoute
+  '/cockpit': typeof CockpitRoute
   '/forecast': typeof ForecastRoute
   '/indicadores': typeof IndicadoresRoute
   '/meta-junho': typeof MetaJunhoRoute
@@ -157,6 +165,7 @@ export interface FileRoutesById {
   '/acoes': typeof AcoesRoute
   '/calendario': typeof CalendarioRoute
   '/closers': typeof ClosersRoute
+  '/cockpit': typeof CockpitRoute
   '/forecast': typeof ForecastRoute
   '/indicadores': typeof IndicadoresRoute
   '/meta-junho': typeof MetaJunhoRoute
@@ -178,6 +187,7 @@ export interface FileRouteTypes {
     | '/acoes'
     | '/calendario'
     | '/closers'
+    | '/cockpit'
     | '/forecast'
     | '/indicadores'
     | '/meta-junho'
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/acoes'
     | '/calendario'
     | '/closers'
+    | '/cockpit'
     | '/forecast'
     | '/indicadores'
     | '/meta-junho'
@@ -216,6 +227,7 @@ export interface FileRouteTypes {
     | '/acoes'
     | '/calendario'
     | '/closers'
+    | '/cockpit'
     | '/forecast'
     | '/indicadores'
     | '/meta-junho'
@@ -236,6 +248,7 @@ export interface RootRouteChildren {
   AcoesRoute: typeof AcoesRoute
   CalendarioRoute: typeof CalendarioRoute
   ClosersRoute: typeof ClosersRoute
+  CockpitRoute: typeof CockpitRoute
   ForecastRoute: typeof ForecastRoute
   IndicadoresRoute: typeof IndicadoresRoute
   MetaJunhoRoute: typeof MetaJunhoRoute
@@ -344,6 +357,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForecastRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cockpit': {
+      id: '/cockpit'
+      path: '/cockpit'
+      fullPath: '/cockpit'
+      preLoaderRoute: typeof CockpitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/closers': {
       id: '/closers'
       path: '/closers'
@@ -380,6 +400,7 @@ const rootRouteChildren: RootRouteChildren = {
   AcoesRoute: AcoesRoute,
   CalendarioRoute: CalendarioRoute,
   ClosersRoute: ClosersRoute,
+  CockpitRoute: CockpitRoute,
   ForecastRoute: ForecastRoute,
   IndicadoresRoute: IndicadoresRoute,
   MetaJunhoRoute: MetaJunhoRoute,
@@ -397,3 +418,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
