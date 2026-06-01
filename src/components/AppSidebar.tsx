@@ -3,7 +3,7 @@ import logo from "@/assets/logo-legacy.svg";
 import {
   LayoutDashboard, Target, Radio, CalendarRange, Users, Briefcase,
   TrendingUp, Repeat, Gauge, LineChart, LayoutGrid, CalendarDays,
-  ListChecks, AlertTriangle,
+  ListChecks, AlertTriangle, Activity, ClipboardCheck, Flag,
 } from "lucide-react";
 
 type NavItem = { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean; group?: string };
@@ -11,6 +11,9 @@ const nav: NavItem[] = [
   { to: "/", label: "Resumo Executivo", icon: LayoutDashboard, exact: true, group: "Visão" },
   { to: "/meta-junho", label: "Meta Junho", icon: Target, group: "Visão" },
   { to: "/war-room", label: "War Room", icon: Radio, group: "Visão" },
+  { to: "/cockpit", label: "Cockpit Diário", icon: Activity, group: "Operação" },
+  { to: "/fechamento-dia", label: "Fechamento do Dia", icon: ClipboardCheck, group: "Operação" },
+  { to: "/checkpoint", label: "Checkpoint 13/06", icon: Flag, group: "Operação" },
   { to: "/sprints", label: "Painel Sprints", icon: LayoutGrid, group: "Execução" },
   { to: "/calendario", label: "Calendário", icon: CalendarDays, group: "Execução" },
   { to: "/s1", label: "Sprint 1", icon: CalendarRange, group: "Execução" },

@@ -22,7 +22,10 @@ import { Route as ReceitaRouteImport } from './routes/receita'
 import { Route as MetaJunhoRouteImport } from './routes/meta-junho'
 import { Route as IndicadoresRouteImport } from './routes/indicadores'
 import { Route as ForecastRouteImport } from './routes/forecast'
+import { Route as FechamentoDiaRouteImport } from './routes/fechamento-dia'
+import { Route as CockpitRouteImport } from './routes/cockpit'
 import { Route as ClosersRouteImport } from './routes/closers'
+import { Route as CheckpointRouteImport } from './routes/checkpoint'
 import { Route as CalendarioRouteImport } from './routes/calendario'
 import { Route as AcoesRouteImport } from './routes/acoes'
 import { Route as IndexRouteImport } from './routes/index'
@@ -92,9 +95,24 @@ const ForecastRoute = ForecastRouteImport.update({
   path: '/forecast',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FechamentoDiaRoute = FechamentoDiaRouteImport.update({
+  id: '/fechamento-dia',
+  path: '/fechamento-dia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CockpitRoute = CockpitRouteImport.update({
+  id: '/cockpit',
+  path: '/cockpit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ClosersRoute = ClosersRouteImport.update({
   id: '/closers',
   path: '/closers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckpointRoute = CheckpointRouteImport.update({
+  id: '/checkpoint',
+  path: '/checkpoint',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CalendarioRoute = CalendarioRouteImport.update({
@@ -117,7 +135,10 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/acoes': typeof AcoesRoute
   '/calendario': typeof CalendarioRoute
+  '/checkpoint': typeof CheckpointRoute
   '/closers': typeof ClosersRoute
+  '/cockpit': typeof CockpitRoute
+  '/fechamento-dia': typeof FechamentoDiaRoute
   '/forecast': typeof ForecastRoute
   '/indicadores': typeof IndicadoresRoute
   '/meta-junho': typeof MetaJunhoRoute
@@ -136,7 +157,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/acoes': typeof AcoesRoute
   '/calendario': typeof CalendarioRoute
+  '/checkpoint': typeof CheckpointRoute
   '/closers': typeof ClosersRoute
+  '/cockpit': typeof CockpitRoute
+  '/fechamento-dia': typeof FechamentoDiaRoute
   '/forecast': typeof ForecastRoute
   '/indicadores': typeof IndicadoresRoute
   '/meta-junho': typeof MetaJunhoRoute
@@ -156,7 +180,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/acoes': typeof AcoesRoute
   '/calendario': typeof CalendarioRoute
+  '/checkpoint': typeof CheckpointRoute
   '/closers': typeof ClosersRoute
+  '/cockpit': typeof CockpitRoute
+  '/fechamento-dia': typeof FechamentoDiaRoute
   '/forecast': typeof ForecastRoute
   '/indicadores': typeof IndicadoresRoute
   '/meta-junho': typeof MetaJunhoRoute
@@ -177,7 +204,10 @@ export interface FileRouteTypes {
     | '/'
     | '/acoes'
     | '/calendario'
+    | '/checkpoint'
     | '/closers'
+    | '/cockpit'
+    | '/fechamento-dia'
     | '/forecast'
     | '/indicadores'
     | '/meta-junho'
@@ -196,7 +226,10 @@ export interface FileRouteTypes {
     | '/'
     | '/acoes'
     | '/calendario'
+    | '/checkpoint'
     | '/closers'
+    | '/cockpit'
+    | '/fechamento-dia'
     | '/forecast'
     | '/indicadores'
     | '/meta-junho'
@@ -215,7 +248,10 @@ export interface FileRouteTypes {
     | '/'
     | '/acoes'
     | '/calendario'
+    | '/checkpoint'
     | '/closers'
+    | '/cockpit'
+    | '/fechamento-dia'
     | '/forecast'
     | '/indicadores'
     | '/meta-junho'
@@ -235,7 +271,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AcoesRoute: typeof AcoesRoute
   CalendarioRoute: typeof CalendarioRoute
+  CheckpointRoute: typeof CheckpointRoute
   ClosersRoute: typeof ClosersRoute
+  CockpitRoute: typeof CockpitRoute
+  FechamentoDiaRoute: typeof FechamentoDiaRoute
   ForecastRoute: typeof ForecastRoute
   IndicadoresRoute: typeof IndicadoresRoute
   MetaJunhoRoute: typeof MetaJunhoRoute
@@ -344,11 +383,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForecastRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fechamento-dia': {
+      id: '/fechamento-dia'
+      path: '/fechamento-dia'
+      fullPath: '/fechamento-dia'
+      preLoaderRoute: typeof FechamentoDiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cockpit': {
+      id: '/cockpit'
+      path: '/cockpit'
+      fullPath: '/cockpit'
+      preLoaderRoute: typeof CockpitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/closers': {
       id: '/closers'
       path: '/closers'
       fullPath: '/closers'
       preLoaderRoute: typeof ClosersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkpoint': {
+      id: '/checkpoint'
+      path: '/checkpoint'
+      fullPath: '/checkpoint'
+      preLoaderRoute: typeof CheckpointRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/calendario': {
@@ -379,7 +439,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AcoesRoute: AcoesRoute,
   CalendarioRoute: CalendarioRoute,
+  CheckpointRoute: CheckpointRoute,
   ClosersRoute: ClosersRoute,
+  CockpitRoute: CockpitRoute,
+  FechamentoDiaRoute: FechamentoDiaRoute,
   ForecastRoute: ForecastRoute,
   IndicadoresRoute: IndicadoresRoute,
   MetaJunhoRoute: MetaJunhoRoute,
