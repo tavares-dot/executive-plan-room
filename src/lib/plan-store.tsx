@@ -248,6 +248,17 @@ const DEFAULT: PlanState = {
     { id: "rk3", nivel: "orange", titulo: "Comparecimento em Reuniões", observacao: "No-show acima da média histórica." },
     { id: "rk4", nivel: "red", titulo: "Taxa de Fechamento", observacao: "Pipeline maduro abaixo do necessário para meta." },
   ],
+  sdrEntries: [],
+  closerEntries: [],
+  fechamentos: [],
+  sprintTargets: {
+    S1: { receita: 140000, contratos: 7, reunioes: 35, negociacoes: 24, agendamentos: 50 },
+    S2: { receita: 160000, contratos: 8, reunioes: 40, negociacoes: 28, agendamentos: 58 },
+    S3: { receita: 170000, contratos: 9, reunioes: 42, negociacoes: 30, agendamentos: 60 },
+    S4: { receita: 180000, contratos: 9, reunioes: 44, negociacoes: 31, agendamentos: 62 },
+  },
+  checkpoint13: { meta: 280000, realizado: 0, contratosEsperados: 14, contratosRealizados: 0 },
+
 };
 
 const STORAGE_KEY = "legacy.plano.junho.2026.v2";
