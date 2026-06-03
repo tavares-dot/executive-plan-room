@@ -432,6 +432,52 @@ const DEFAULT: PlanState = {
   },
   checkpoint13: { meta: 280000, realizado: 0, contratosEsperados: 14, contratosRealizados: 0 },
 
+  operacaoDiaria: [],
+  crmImport: { importedAt: "", source: "", rows: [] },
+  pipeline: [],
+  leadsCriticos: [],
+  forecastAdv: {
+    commit: 0, bestCase: 0, worstCase: 0,
+    pipelinePonderado: 0, gap: 0, contratosRestantes: 33,
+    ritmoDiarioNecessario: 0, projecaoFechamento: 0, diasRestantes: 23,
+  },
+  indicadoresCat: {
+    marketing: [
+      { id: "mk1", nome: "Leads Gerados", meta: 600, atual: 0 },
+      { id: "mk2", nome: "MQLs", meta: 240, atual: 0 },
+      { id: "mk3", nome: "CPL", meta: 80, atual: 0, unidade: "R$" },
+    ],
+    pre_vendas: [
+      { id: "pv1", nome: "Tentativas 3C", meta: 9200, atual: 0 },
+      { id: "pv2", nome: "Conexões", meta: 920, atual: 0 },
+      { id: "pv3", nome: "Agendamentos", meta: 230, atual: 0 },
+    ],
+    vendas: [
+      { id: "v1", nome: "Reuniões Realizadas", meta: 161, atual: 0 },
+      { id: "v2", nome: "Negociações", meta: 113, atual: 0 },
+      { id: "v3", nome: "Fechamentos", meta: 33, atual: 0 },
+    ],
+    receita: [
+      { id: "rc1", nome: "Receita Realizada", meta: 650000, atual: 0, unidade: "R$" },
+      { id: "rc2", nome: "Ticket Médio", meta: 20000, atual: 0, unidade: "R$" },
+      { id: "rc3", nome: "Ciclo de Vendas", meta: 28, atual: 0, unidade: "dias" },
+    ],
+    qualidade: [
+      { id: "q1", nome: "Show Rate", meta: 70, atual: 0, unidade: "%" },
+      { id: "q2", nome: "Win Rate", meta: 30, atual: 0, unidade: "%" },
+      { id: "q3", nome: "Rejeição MQL", meta: 35, atual: 0, unidade: "%" },
+    ],
+  },
+  qualitativo: { motivosPerda: [], aprendizados: [], sinaisICP: [], observacoes: [] },
+  alerts: [],
+  thresholds: {
+    taxaConexaoMin: 10, taxaConexaoCritico: 8,
+    taxaAgendamentoMin: 25, showRateMin: 60,
+    slaMaxHoras: 2, leadsParadosMax: 25,
+    rejeicaoMqlMax: 35, planBMinPctMes: 50,
+    ticketAlvo: 20000, metaMes: 650000,
+    diasUteis: 23, contratosNecessarios: 33,
+  },
 };
 
 const STORAGE_KEY = "legacy.plano.junho.2026.v2";
