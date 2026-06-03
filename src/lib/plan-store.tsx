@@ -31,6 +31,24 @@ export interface SDRData {
   leadsParados?: number;
   principalMotivoPerda?: string;
   insights?: string;
+  scoreOperacional?: number;  // 0-100
+  scoreQualitativo?: number;  // 0-100
+  semaforo?: Semaforo;
+  sprintData?: SDRSprintRow[];
+}
+
+export type Semaforo = "excelente" | "saudavel" | "atencao" | "critico";
+
+export interface SDRSprintRow {
+  sprint: SprintKey;
+  tentativas: number; conexoes: number; agendamentos: number;
+  reunioes: number; noShow: number; leadsParados: number; slaMedio: number;
+}
+
+export interface CloserSprintRow {
+  sprint: SprintKey;
+  reunioes: number; noShow: number; propostas: number; negociacoes: number;
+  fechamentos: number; receita: number;
 }
 
 export interface CloserData {
@@ -42,6 +60,18 @@ export interface CloserData {
   resReceita: number;
   resReunioes: number;
   resFechamentos: number;
+  // Estendido (opcionais p/ retrocompatibilidade)
+  noShow?: number;
+  propostas?: number;
+  negociacoes?: number;
+  ticketMedio?: number;
+  winRate?: number;          // %
+  scoreOperacional?: number; // 0-100
+  scoreQualitativo?: number; // 0-100
+  semaforo?: Semaforo;
+  forecastIndividual?: number;
+  sprintData?: CloserSprintRow[];
+  observacoes?: string;
 }
 
 export interface RitualItem { id: string; nome: string; horario: string; feito: boolean; }
@@ -90,6 +120,128 @@ export interface PlanState {
   fechamentos: FechamentoDia[];
   sprintTargets: Record<SprintKey, SprintTarget>;
   checkpoint13: { meta: number; realizado: number; contratosEsperados: number; contratosRealizados: number };
+
+  // ====== Extensões (opcionais — retrocompatíveis) ======
+  operacaoDiaria?: OperacaoDiariaEntry[];
+  crmImport?: CrmImport;
+  pipeline?: PipelineOpp[];
+  leadsCriticos?: LeadCritico[];
+  forecastAdv?: ForecastAdv;
+  indicadoresCat?: IndicadoresCategoria;
+  qualitativo?: Qualitativo;
+  alerts?: AlertItem[];
+  thresholds?: Thresholds;
+}
+
+export type OperacaoColaboradorTipo = "sdr" | "closer";
+export interface OperacaoDiariaEntry {
+  id: string;
+  date: string;            // ISO yyyy-mm-dd
+  colaboradorTipo: OperacaoColaboradorTipo;
+  colaboradorId: string;
+  sprint: SprintKey;
+  // KPIs do dia (todos opcionais — depende do tipo)
+  tentativas?: number; conexoes?: number; whatsapp?: number;
+  agendamentos?: number; reunioes?: number; noShow?: number;
+  propostas?: number; negociacoes?: number; fechamentos?: number;
+  receita?: number; leadsParados?: number; slaMedioHoras?: number;
+  obs?: string;
+}
+
+export interface CrmImport {
+  importedAt: string;       // ISO
+  source: string;           // "csv" | "rdstation" | "hubspot" | ...
+  rows: Record<string, unknown>[];
+  mapping?: Record<string, string>;
+}
+
+export type PipelineStage =
+  | "Prospect" | "Qualificação" | "Agendado" | "Reunião"
+  | "Proposta" | "Negociação" | "Fechado-Ganho" | "Fechado-Perdido";
+
+export interface PipelineOpp {
+  id: string;
+  empresa: string;
+  contato?: string;
+  ownerType: OperacaoColaboradorTipo;
+  ownerId: string;
+  stage: PipelineStage;
+  amount: number;
+  probability: number;      // 0-100
+  weightedAmount: number;   // amount * probability/100 (recalculável)
+  expectedCloseDate: string;
+  nextStep?: string;
+  nextStepDate?: string;
+  daysInStage: number;
+  criticidade: Semaforo;
+  origem?: string;
+  obs?: string;
+}
+
+export interface LeadCritico {
+  id: string;
+  empresa: string;
+  motivo: string;           // "sem retorno 7d", "no-show 2x", etc.
+  ownerId?: string;
+  oppId?: string;
+  nivel: Semaforo;
+  criadoEm: string;
+  acaoSugerida?: string;
+}
+
+export interface ForecastAdv {
+  commit: number;
+  bestCase: number;
+  worstCase: number;
+  pipelinePonderado: number;
+  gap: number;
+  contratosRestantes: number;
+  ritmoDiarioNecessario: number;  // R$/dia
+  projecaoFechamento: number;
+  diasRestantes: number;
+}
+
+export interface IndicadorItem { id: string; nome: string; meta: number; atual: number; unidade?: string; }
+export interface IndicadoresCategoria {
+  marketing: IndicadorItem[];
+  pre_vendas: IndicadorItem[];
+  vendas: IndicadorItem[];
+  receita: IndicadorItem[];
+  qualidade: IndicadorItem[];
+}
+
+export interface QualNote { id: string; texto: string; autor?: string; data: string; tag?: string; }
+export interface Qualitativo {
+  motivosPerda: QualNote[];
+  aprendizados: QualNote[];
+  sinaisICP: QualNote[];
+  observacoes: QualNote[];
+}
+
+export type AlertArea = "sdr" | "closer" | "pipeline" | "forecast" | "ritual" | "outro";
+export interface AlertItem {
+  id: string;
+  nivel: Semaforo;
+  area: AlertArea;
+  mensagem: string;
+  criadoEm: string;
+  resolvido?: boolean;
+  refId?: string;
+}
+
+export interface Thresholds {
+  taxaConexaoMin: number;     // % (ex: 10)
+  taxaConexaoCritico: number; // % (ex: 8)
+  taxaAgendamentoMin: number; // % (ex: 25)
+  showRateMin: number;        // % (ex: 60)
+  slaMaxHoras: number;        // h  (ex: 2)
+  leadsParadosMax: number;    // qtd (ex: 25)
+  rejeicaoMqlMax: number;     // % (ex: 35)
+  planBMinPctMes: number;     // % (ex: 50)
+  ticketAlvo: number;         // R$
+  metaMes: number;            // R$
+  diasUteis: number;          // 23
+  contratosNecessarios: number; // 33
 }
 
 export type SprintKey = "S1" | "S2" | "S3" | "S4";
@@ -280,6 +432,52 @@ const DEFAULT: PlanState = {
   },
   checkpoint13: { meta: 280000, realizado: 0, contratosEsperados: 14, contratosRealizados: 0 },
 
+  operacaoDiaria: [],
+  crmImport: { importedAt: "", source: "", rows: [] },
+  pipeline: [],
+  leadsCriticos: [],
+  forecastAdv: {
+    commit: 0, bestCase: 0, worstCase: 0,
+    pipelinePonderado: 0, gap: 0, contratosRestantes: 33,
+    ritmoDiarioNecessario: 0, projecaoFechamento: 0, diasRestantes: 23,
+  },
+  indicadoresCat: {
+    marketing: [
+      { id: "mk1", nome: "Leads Gerados", meta: 600, atual: 0 },
+      { id: "mk2", nome: "MQLs", meta: 240, atual: 0 },
+      { id: "mk3", nome: "CPL", meta: 80, atual: 0, unidade: "R$" },
+    ],
+    pre_vendas: [
+      { id: "pv1", nome: "Tentativas 3C", meta: 9200, atual: 0 },
+      { id: "pv2", nome: "Conexões", meta: 920, atual: 0 },
+      { id: "pv3", nome: "Agendamentos", meta: 230, atual: 0 },
+    ],
+    vendas: [
+      { id: "v1", nome: "Reuniões Realizadas", meta: 161, atual: 0 },
+      { id: "v2", nome: "Negociações", meta: 113, atual: 0 },
+      { id: "v3", nome: "Fechamentos", meta: 33, atual: 0 },
+    ],
+    receita: [
+      { id: "rc1", nome: "Receita Realizada", meta: 650000, atual: 0, unidade: "R$" },
+      { id: "rc2", nome: "Ticket Médio", meta: 20000, atual: 0, unidade: "R$" },
+      { id: "rc3", nome: "Ciclo de Vendas", meta: 28, atual: 0, unidade: "dias" },
+    ],
+    qualidade: [
+      { id: "q1", nome: "Show Rate", meta: 70, atual: 0, unidade: "%" },
+      { id: "q2", nome: "Win Rate", meta: 30, atual: 0, unidade: "%" },
+      { id: "q3", nome: "Rejeição MQL", meta: 35, atual: 0, unidade: "%" },
+    ],
+  },
+  qualitativo: { motivosPerda: [], aprendizados: [], sinaisICP: [], observacoes: [] },
+  alerts: [],
+  thresholds: {
+    taxaConexaoMin: 10, taxaConexaoCritico: 8,
+    taxaAgendamentoMin: 25, showRateMin: 60,
+    slaMaxHoras: 2, leadsParadosMax: 25,
+    rejeicaoMqlMax: 35, planBMinPctMes: 50,
+    ticketAlvo: 20000, metaMes: 650000,
+    diasUteis: 23, contratosNecessarios: 33,
+  },
 };
 
 const STORAGE_KEY = "legacy.plano.junho.2026.v2";
@@ -330,6 +528,20 @@ export function PlanProvider({ children }: { children: ReactNode }) {
           fechamentos: parsed.fechamentos ?? DEFAULT.fechamentos,
           sprintTargets: { ...DEFAULT.sprintTargets, ...(parsed.sprintTargets || {}) },
           checkpoint13: { ...DEFAULT.checkpoint13, ...(parsed.checkpoint13 || {}) },
+
+          // ===== Novos blocos (deep-merge defensivo) =====
+          operacaoDiaria: parsed.operacaoDiaria ?? DEFAULT.operacaoDiaria,
+          crmImport: { ...DEFAULT.crmImport!, ...(parsed.crmImport || {}) },
+          pipeline: parsed.pipeline ?? DEFAULT.pipeline,
+          leadsCriticos: parsed.leadsCriticos ?? DEFAULT.leadsCriticos,
+          forecastAdv: { ...DEFAULT.forecastAdv!, ...(parsed.forecastAdv || {}) },
+          indicadoresCat: {
+            ...DEFAULT.indicadoresCat!,
+            ...(parsed.indicadoresCat || {}),
+          },
+          qualitativo: { ...DEFAULT.qualitativo!, ...(parsed.qualitativo || {}) },
+          alerts: parsed.alerts ?? DEFAULT.alerts,
+          thresholds: { ...DEFAULT.thresholds!, ...(parsed.thresholds || {}) },
         });
       }
     } catch {}
