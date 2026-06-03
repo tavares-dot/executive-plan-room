@@ -21,7 +21,16 @@ export interface SDRData {
   resultadoLigacoes: number;
   resultadoConexoes: number;
   resultadoReunioes: number;
-  semanal: { semana: string; reunioes: number }[];
+  semanal: { semana: string; reunioes: number; tentativas?: number; conexoes?: number; agendamentos?: number }[];
+  // Operacional ampliado
+  tentativas3C?: number;
+  whatsapp?: number;
+  agendamentos?: number;
+  reunioesGeradas?: number;
+  slaMedio?: number; // em horas
+  leadsParados?: number;
+  principalMotivoPerda?: string;
+  insights?: string;
 }
 
 export interface CloserData {
@@ -172,20 +181,32 @@ const DEFAULT: PlanState = {
   sdrs: [
     {
       id: "sdr1", nome: "SDR 1",
-      metaLigacoes: 400, metaConexoes: 120, metaReunioes: 24,
-      resultadoLigacoes: 0, resultadoConexoes: 0, resultadoReunioes: 0,
+      metaLigacoes: 4600, metaConexoes: 460, metaReunioes: 80,
+      resultadoLigacoes: 3120, resultadoConexoes: 312, resultadoReunioes: 58,
+      tentativas3C: 3120, whatsapp: 880, agendamentos: 96, reunioesGeradas: 58,
+      slaMedio: 2.4, leadsParados: 18,
+      principalMotivoPerda: "Sem fit / orçamento",
+      insights: "Volume forte, conexão saudável. Atenção ao SLA acima de 2h.",
       semanal: [
-        { semana: "S1", reunioes: 0 }, { semana: "S2", reunioes: 0 },
-        { semana: "S3", reunioes: 0 }, { semana: "S4", reunioes: 0 },
+        { semana: "S1", reunioes: 18, tentativas: 820, conexoes: 88, agendamentos: 26 },
+        { semana: "S2", reunioes: 16, tentativas: 790, conexoes: 80, agendamentos: 24 },
+        { semana: "S3", reunioes: 14, tentativas: 770, conexoes: 74, agendamentos: 24 },
+        { semana: "S4", reunioes: 10, tentativas: 740, conexoes: 70, agendamentos: 22 },
       ],
     },
     {
       id: "sdr2", nome: "SDR 2",
-      metaLigacoes: 400, metaConexoes: 120, metaReunioes: 24,
-      resultadoLigacoes: 0, resultadoConexoes: 0, resultadoReunioes: 0,
+      metaLigacoes: 4600, metaConexoes: 460, metaReunioes: 80,
+      resultadoLigacoes: 2740, resultadoConexoes: 196, resultadoReunioes: 38,
+      tentativas3C: 2740, whatsapp: 540, agendamentos: 52, reunioesGeradas: 38,
+      slaMedio: 4.8, leadsParados: 41,
+      principalMotivoPerda: "Lead frio / sem retorno",
+      insights: "Conexão abaixo de 8%. Excesso de leads parados. Revisar cadência.",
       semanal: [
-        { semana: "S1", reunioes: 0 }, { semana: "S2", reunioes: 0 },
-        { semana: "S3", reunioes: 0 }, { semana: "S4", reunioes: 0 },
+        { semana: "S1", reunioes: 12, tentativas: 720, conexoes: 58, agendamentos: 16 },
+        { semana: "S2", reunioes: 10, tentativas: 700, conexoes: 50, agendamentos: 14 },
+        { semana: "S3", reunioes: 9, tentativas: 680, conexoes: 46, agendamentos: 12 },
+        { semana: "S4", reunioes: 7, tentativas: 640, conexoes: 42, agendamentos: 10 },
       ],
     },
   ],
@@ -292,6 +313,18 @@ export function PlanProvider({ children }: { children: ReactNode }) {
           calendario: parsed.calendario?.length ? parsed.calendario : DEFAULT.calendario,
           proximasAcoes: parsed.proximasAcoes ?? DEFAULT.proximasAcoes,
           riscos: parsed.riscos ?? DEFAULT.riscos,
+          sdrs: (parsed.sdrs ?? DEFAULT.sdrs).map((sd: any, i: number) => ({
+            ...(DEFAULT.sdrs[i] ?? DEFAULT.sdrs[0]),
+            ...sd,
+            tentativas3C: sd.tentativas3C ?? sd.resultadoLigacoes ?? DEFAULT.sdrs[i]?.tentativas3C ?? 0,
+            whatsapp: sd.whatsapp ?? DEFAULT.sdrs[i]?.whatsapp ?? 0,
+            agendamentos: sd.agendamentos ?? DEFAULT.sdrs[i]?.agendamentos ?? 0,
+            reunioesGeradas: sd.reunioesGeradas ?? sd.resultadoReunioes ?? DEFAULT.sdrs[i]?.reunioesGeradas ?? 0,
+            slaMedio: sd.slaMedio ?? DEFAULT.sdrs[i]?.slaMedio ?? 0,
+            leadsParados: sd.leadsParados ?? DEFAULT.sdrs[i]?.leadsParados ?? 0,
+            principalMotivoPerda: sd.principalMotivoPerda ?? DEFAULT.sdrs[i]?.principalMotivoPerda ?? "",
+            insights: sd.insights ?? DEFAULT.sdrs[i]?.insights ?? "",
+          })),
           sdrEntries: parsed.sdrEntries ?? DEFAULT.sdrEntries,
           closerEntries: parsed.closerEntries ?? DEFAULT.closerEntries,
           fechamentos: parsed.fechamentos ?? DEFAULT.fechamentos,
