@@ -528,6 +528,20 @@ export function PlanProvider({ children }: { children: ReactNode }) {
           fechamentos: parsed.fechamentos ?? DEFAULT.fechamentos,
           sprintTargets: { ...DEFAULT.sprintTargets, ...(parsed.sprintTargets || {}) },
           checkpoint13: { ...DEFAULT.checkpoint13, ...(parsed.checkpoint13 || {}) },
+
+          // ===== Novos blocos (deep-merge defensivo) =====
+          operacaoDiaria: parsed.operacaoDiaria ?? DEFAULT.operacaoDiaria,
+          crmImport: { ...DEFAULT.crmImport!, ...(parsed.crmImport || {}) },
+          pipeline: parsed.pipeline ?? DEFAULT.pipeline,
+          leadsCriticos: parsed.leadsCriticos ?? DEFAULT.leadsCriticos,
+          forecastAdv: { ...DEFAULT.forecastAdv!, ...(parsed.forecastAdv || {}) },
+          indicadoresCat: {
+            ...DEFAULT.indicadoresCat!,
+            ...(parsed.indicadoresCat || {}),
+          },
+          qualitativo: { ...DEFAULT.qualitativo!, ...(parsed.qualitativo || {}) },
+          alerts: parsed.alerts ?? DEFAULT.alerts,
+          thresholds: { ...DEFAULT.thresholds!, ...(parsed.thresholds || {}) },
         });
       }
     } catch {}
