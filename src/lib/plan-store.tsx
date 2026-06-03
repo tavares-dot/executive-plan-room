@@ -21,7 +21,16 @@ export interface SDRData {
   resultadoLigacoes: number;
   resultadoConexoes: number;
   resultadoReunioes: number;
-  semanal: { semana: string; reunioes: number }[];
+  semanal: { semana: string; reunioes: number; tentativas?: number; conexoes?: number; agendamentos?: number }[];
+  // Operacional ampliado
+  tentativas3C?: number;
+  whatsapp?: number;
+  agendamentos?: number;
+  reunioesGeradas?: number;
+  slaMedio?: number; // em horas
+  leadsParados?: number;
+  principalMotivoPerda?: string;
+  insights?: string;
 }
 
 export interface CloserData {
