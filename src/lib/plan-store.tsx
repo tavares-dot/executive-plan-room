@@ -33,6 +33,20 @@ export interface SDRData {
   insights?: string;
 }
 
+export type Semaforo = "excelente" | "saudavel" | "atencao" | "critico";
+
+export interface SDRSprintRow {
+  sprint: SprintKey;
+  tentativas: number; conexoes: number; agendamentos: number;
+  reunioes: number; noShow: number; leadsParados: number; slaMedio: number;
+}
+
+export interface CloserSprintRow {
+  sprint: SprintKey;
+  reunioes: number; noShow: number; propostas: number; negociacoes: number;
+  fechamentos: number; receita: number;
+}
+
 export interface CloserData {
   id: string;
   nome: string;
@@ -42,6 +56,18 @@ export interface CloserData {
   resReceita: number;
   resReunioes: number;
   resFechamentos: number;
+  // Estendido (opcionais p/ retrocompatibilidade)
+  noShow?: number;
+  propostas?: number;
+  negociacoes?: number;
+  ticketMedio?: number;
+  winRate?: number;          // %
+  scoreOperacional?: number; // 0-100
+  scoreQualitativo?: number; // 0-100
+  semaforo?: Semaforo;
+  forecastIndividual?: number;
+  sprintData?: CloserSprintRow[];
+  observacoes?: string;
 }
 
 export interface RitualItem { id: string; nome: string; horario: string; feito: boolean; }
