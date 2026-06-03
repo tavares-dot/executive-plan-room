@@ -120,6 +120,128 @@ export interface PlanState {
   fechamentos: FechamentoDia[];
   sprintTargets: Record<SprintKey, SprintTarget>;
   checkpoint13: { meta: number; realizado: number; contratosEsperados: number; contratosRealizados: number };
+
+  // ====== Extensões (opcionais — retrocompatíveis) ======
+  operacaoDiaria?: OperacaoDiariaEntry[];
+  crmImport?: CrmImport;
+  pipeline?: PipelineOpp[];
+  leadsCriticos?: LeadCritico[];
+  forecastAdv?: ForecastAdv;
+  indicadoresCat?: IndicadoresCategoria;
+  qualitativo?: Qualitativo;
+  alerts?: AlertItem[];
+  thresholds?: Thresholds;
+}
+
+export type OperacaoColaboradorTipo = "sdr" | "closer";
+export interface OperacaoDiariaEntry {
+  id: string;
+  date: string;            // ISO yyyy-mm-dd
+  colaboradorTipo: OperacaoColaboradorTipo;
+  colaboradorId: string;
+  sprint: SprintKey;
+  // KPIs do dia (todos opcionais — depende do tipo)
+  tentativas?: number; conexoes?: number; whatsapp?: number;
+  agendamentos?: number; reunioes?: number; noShow?: number;
+  propostas?: number; negociacoes?: number; fechamentos?: number;
+  receita?: number; leadsParados?: number; slaMedioHoras?: number;
+  obs?: string;
+}
+
+export interface CrmImport {
+  importedAt: string;       // ISO
+  source: string;           // "csv" | "rdstation" | "hubspot" | ...
+  rows: Record<string, unknown>[];
+  mapping?: Record<string, string>;
+}
+
+export type PipelineStage =
+  | "Prospect" | "Qualificação" | "Agendado" | "Reunião"
+  | "Proposta" | "Negociação" | "Fechado-Ganho" | "Fechado-Perdido";
+
+export interface PipelineOpp {
+  id: string;
+  empresa: string;
+  contato?: string;
+  ownerType: OperacaoColaboradorTipo;
+  ownerId: string;
+  stage: PipelineStage;
+  amount: number;
+  probability: number;      // 0-100
+  weightedAmount: number;   // amount * probability/100 (recalculável)
+  expectedCloseDate: string;
+  nextStep?: string;
+  nextStepDate?: string;
+  daysInStage: number;
+  criticidade: Semaforo;
+  origem?: string;
+  obs?: string;
+}
+
+export interface LeadCritico {
+  id: string;
+  empresa: string;
+  motivo: string;           // "sem retorno 7d", "no-show 2x", etc.
+  ownerId?: string;
+  oppId?: string;
+  nivel: Semaforo;
+  criadoEm: string;
+  acaoSugerida?: string;
+}
+
+export interface ForecastAdv {
+  commit: number;
+  bestCase: number;
+  worstCase: number;
+  pipelinePonderado: number;
+  gap: number;
+  contratosRestantes: number;
+  ritmoDiarioNecessario: number;  // R$/dia
+  projecaoFechamento: number;
+  diasRestantes: number;
+}
+
+export interface IndicadorItem { id: string; nome: string; meta: number; atual: number; unidade?: string; }
+export interface IndicadoresCategoria {
+  marketing: IndicadorItem[];
+  pre_vendas: IndicadorItem[];
+  vendas: IndicadorItem[];
+  receita: IndicadorItem[];
+  qualidade: IndicadorItem[];
+}
+
+export interface QualNote { id: string; texto: string; autor?: string; data: string; tag?: string; }
+export interface Qualitativo {
+  motivosPerda: QualNote[];
+  aprendizados: QualNote[];
+  sinaisICP: QualNote[];
+  observacoes: QualNote[];
+}
+
+export type AlertArea = "sdr" | "closer" | "pipeline" | "forecast" | "ritual" | "outro";
+export interface AlertItem {
+  id: string;
+  nivel: Semaforo;
+  area: AlertArea;
+  mensagem: string;
+  criadoEm: string;
+  resolvido?: boolean;
+  refId?: string;
+}
+
+export interface Thresholds {
+  taxaConexaoMin: number;     // % (ex: 10)
+  taxaConexaoCritico: number; // % (ex: 8)
+  taxaAgendamentoMin: number; // % (ex: 25)
+  showRateMin: number;        // % (ex: 60)
+  slaMaxHoras: number;        // h  (ex: 2)
+  leadsParadosMax: number;    // qtd (ex: 25)
+  rejeicaoMqlMax: number;     // % (ex: 35)
+  planBMinPctMes: number;     // % (ex: 50)
+  ticketAlvo: number;         // R$
+  metaMes: number;            // R$
+  diasUteis: number;          // 23
+  contratosNecessarios: number; // 33
 }
 
 export type SprintKey = "S1" | "S2" | "S3" | "S4";
