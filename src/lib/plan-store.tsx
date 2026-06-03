@@ -31,6 +31,10 @@ export interface SDRData {
   leadsParados?: number;
   principalMotivoPerda?: string;
   insights?: string;
+  scoreOperacional?: number;  // 0-100
+  scoreQualitativo?: number;  // 0-100
+  semaforo?: Semaforo;
+  sprintData?: SDRSprintRow[];
 }
 
 export type Semaforo = "excelente" | "saudavel" | "atencao" | "critico";
