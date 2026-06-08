@@ -9,464 +9,353 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WarRoomRouteImport } from './routes/war-room'
-import { Route as SprintsRouteImport } from './routes/sprints'
-import { Route as SdrsRouteImport } from './routes/sdrs'
-import { Route as S4RouteImport } from './routes/s4'
-import { Route as S3RouteImport } from './routes/s3'
-import { Route as S2RouteImport } from './routes/s2'
-import { Route as S1RouteImport } from './routes/s1'
-import { Route as RituaisRouteImport } from './routes/rituais'
-import { Route as RiscosRouteImport } from './routes/riscos'
-import { Route as ReceitaRouteImport } from './routes/receita'
-import { Route as MetaJunhoRouteImport } from './routes/meta-junho'
-import { Route as IndicadoresRouteImport } from './routes/indicadores'
-import { Route as ForecastRouteImport } from './routes/forecast'
-import { Route as FechamentoDiaRouteImport } from './routes/fechamento-dia'
-import { Route as CockpitRouteImport } from './routes/cockpit'
-import { Route as ClosersRouteImport } from './routes/closers'
-import { Route as CheckpointRouteImport } from './routes/checkpoint'
-import { Route as CalendarioRouteImport } from './routes/calendario'
-import { Route as AcoesRouteImport } from './routes/acoes'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedSprintsRouteImport } from './routes/_authenticated/sprints'
+import { Route as AuthenticatedSemanalRouteImport } from './routes/_authenticated/semanal'
+import { Route as AuthenticatedSdrsRouteImport } from './routes/_authenticated/sdrs'
+import { Route as AuthenticatedReunioesRouteImport } from './routes/_authenticated/reunioes'
+import { Route as AuthenticatedOperacaoRouteImport } from './routes/_authenticated/operacao'
+import { Route as AuthenticatedMensalRouteImport } from './routes/_authenticated/mensal'
+import { Route as AuthenticatedKanbanRouteImport } from './routes/_authenticated/kanban'
+import { Route as AuthenticatedGovernancaRouteImport } from './routes/_authenticated/governanca'
+import { Route as AuthenticatedFunilRouteImport } from './routes/_authenticated/funil'
+import { Route as AuthenticatedForecastRouteImport } from './routes/_authenticated/forecast'
+import { Route as AuthenticatedCrmRouteImport } from './routes/_authenticated/crm'
+import { Route as AuthenticatedClosersRouteImport } from './routes/_authenticated/closers'
 
-const WarRoomRoute = WarRoomRouteImport.update({
-  id: '/war-room',
-  path: '/war-room',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SprintsRoute = SprintsRouteImport.update({
-  id: '/sprints',
-  path: '/sprints',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SdrsRoute = SdrsRouteImport.update({
-  id: '/sdrs',
-  path: '/sdrs',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const S4Route = S4RouteImport.update({
-  id: '/s4',
-  path: '/s4',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const S3Route = S3RouteImport.update({
-  id: '/s3',
-  path: '/s3',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const S2Route = S2RouteImport.update({
-  id: '/s2',
-  path: '/s2',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const S1Route = S1RouteImport.update({
-  id: '/s1',
-  path: '/s1',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RituaisRoute = RituaisRouteImport.update({
-  id: '/rituais',
-  path: '/rituais',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RiscosRoute = RiscosRouteImport.update({
-  id: '/riscos',
-  path: '/riscos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ReceitaRoute = ReceitaRouteImport.update({
-  id: '/receita',
-  path: '/receita',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MetaJunhoRoute = MetaJunhoRouteImport.update({
-  id: '/meta-junho',
-  path: '/meta-junho',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndicadoresRoute = IndicadoresRouteImport.update({
-  id: '/indicadores',
-  path: '/indicadores',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ForecastRoute = ForecastRouteImport.update({
-  id: '/forecast',
-  path: '/forecast',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FechamentoDiaRoute = FechamentoDiaRouteImport.update({
-  id: '/fechamento-dia',
-  path: '/fechamento-dia',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CockpitRoute = CockpitRouteImport.update({
-  id: '/cockpit',
-  path: '/cockpit',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ClosersRoute = ClosersRouteImport.update({
-  id: '/closers',
-  path: '/closers',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CheckpointRoute = CheckpointRouteImport.update({
-  id: '/checkpoint',
-  path: '/checkpoint',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CalendarioRoute = CalendarioRouteImport.update({
-  id: '/calendario',
-  path: '/calendario',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AcoesRoute = AcoesRouteImport.update({
-  id: '/acoes',
-  path: '/acoes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSprintsRoute = AuthenticatedSprintsRouteImport.update({
+  id: '/sprints',
+  path: '/sprints',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSemanalRoute = AuthenticatedSemanalRouteImport.update({
+  id: '/semanal',
+  path: '/semanal',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSdrsRoute = AuthenticatedSdrsRouteImport.update({
+  id: '/sdrs',
+  path: '/sdrs',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedReunioesRoute = AuthenticatedReunioesRouteImport.update({
+  id: '/reunioes',
+  path: '/reunioes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedOperacaoRoute = AuthenticatedOperacaoRouteImport.update({
+  id: '/operacao',
+  path: '/operacao',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMensalRoute = AuthenticatedMensalRouteImport.update({
+  id: '/mensal',
+  path: '/mensal',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedKanbanRoute = AuthenticatedKanbanRouteImport.update({
+  id: '/kanban',
+  path: '/kanban',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedGovernancaRoute = AuthenticatedGovernancaRouteImport.update({
+  id: '/governanca',
+  path: '/governanca',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedFunilRoute = AuthenticatedFunilRouteImport.update({
+  id: '/funil',
+  path: '/funil',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedForecastRoute = AuthenticatedForecastRouteImport.update({
+  id: '/forecast',
+  path: '/forecast',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCrmRoute = AuthenticatedCrmRouteImport.update({
+  id: '/crm',
+  path: '/crm',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedClosersRoute = AuthenticatedClosersRouteImport.update({
+  id: '/closers',
+  path: '/closers',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/acoes': typeof AcoesRoute
-  '/calendario': typeof CalendarioRoute
-  '/checkpoint': typeof CheckpointRoute
-  '/closers': typeof ClosersRoute
-  '/cockpit': typeof CockpitRoute
-  '/fechamento-dia': typeof FechamentoDiaRoute
-  '/forecast': typeof ForecastRoute
-  '/indicadores': typeof IndicadoresRoute
-  '/meta-junho': typeof MetaJunhoRoute
-  '/receita': typeof ReceitaRoute
-  '/riscos': typeof RiscosRoute
-  '/rituais': typeof RituaisRoute
-  '/s1': typeof S1Route
-  '/s2': typeof S2Route
-  '/s3': typeof S3Route
-  '/s4': typeof S4Route
-  '/sdrs': typeof SdrsRoute
-  '/sprints': typeof SprintsRoute
-  '/war-room': typeof WarRoomRoute
+  '/': typeof AuthenticatedIndexRoute
+  '/auth': typeof AuthRoute
+  '/closers': typeof AuthenticatedClosersRoute
+  '/crm': typeof AuthenticatedCrmRoute
+  '/forecast': typeof AuthenticatedForecastRoute
+  '/funil': typeof AuthenticatedFunilRoute
+  '/governanca': typeof AuthenticatedGovernancaRoute
+  '/kanban': typeof AuthenticatedKanbanRoute
+  '/mensal': typeof AuthenticatedMensalRoute
+  '/operacao': typeof AuthenticatedOperacaoRoute
+  '/reunioes': typeof AuthenticatedReunioesRoute
+  '/sdrs': typeof AuthenticatedSdrsRoute
+  '/semanal': typeof AuthenticatedSemanalRoute
+  '/sprints': typeof AuthenticatedSprintsRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/acoes': typeof AcoesRoute
-  '/calendario': typeof CalendarioRoute
-  '/checkpoint': typeof CheckpointRoute
-  '/closers': typeof ClosersRoute
-  '/cockpit': typeof CockpitRoute
-  '/fechamento-dia': typeof FechamentoDiaRoute
-  '/forecast': typeof ForecastRoute
-  '/indicadores': typeof IndicadoresRoute
-  '/meta-junho': typeof MetaJunhoRoute
-  '/receita': typeof ReceitaRoute
-  '/riscos': typeof RiscosRoute
-  '/rituais': typeof RituaisRoute
-  '/s1': typeof S1Route
-  '/s2': typeof S2Route
-  '/s3': typeof S3Route
-  '/s4': typeof S4Route
-  '/sdrs': typeof SdrsRoute
-  '/sprints': typeof SprintsRoute
-  '/war-room': typeof WarRoomRoute
+  '/auth': typeof AuthRoute
+  '/closers': typeof AuthenticatedClosersRoute
+  '/crm': typeof AuthenticatedCrmRoute
+  '/forecast': typeof AuthenticatedForecastRoute
+  '/funil': typeof AuthenticatedFunilRoute
+  '/governanca': typeof AuthenticatedGovernancaRoute
+  '/kanban': typeof AuthenticatedKanbanRoute
+  '/mensal': typeof AuthenticatedMensalRoute
+  '/operacao': typeof AuthenticatedOperacaoRoute
+  '/reunioes': typeof AuthenticatedReunioesRoute
+  '/sdrs': typeof AuthenticatedSdrsRoute
+  '/semanal': typeof AuthenticatedSemanalRoute
+  '/sprints': typeof AuthenticatedSprintsRoute
+  '/': typeof AuthenticatedIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/acoes': typeof AcoesRoute
-  '/calendario': typeof CalendarioRoute
-  '/checkpoint': typeof CheckpointRoute
-  '/closers': typeof ClosersRoute
-  '/cockpit': typeof CockpitRoute
-  '/fechamento-dia': typeof FechamentoDiaRoute
-  '/forecast': typeof ForecastRoute
-  '/indicadores': typeof IndicadoresRoute
-  '/meta-junho': typeof MetaJunhoRoute
-  '/receita': typeof ReceitaRoute
-  '/riscos': typeof RiscosRoute
-  '/rituais': typeof RituaisRoute
-  '/s1': typeof S1Route
-  '/s2': typeof S2Route
-  '/s3': typeof S3Route
-  '/s4': typeof S4Route
-  '/sdrs': typeof SdrsRoute
-  '/sprints': typeof SprintsRoute
-  '/war-room': typeof WarRoomRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/closers': typeof AuthenticatedClosersRoute
+  '/_authenticated/crm': typeof AuthenticatedCrmRoute
+  '/_authenticated/forecast': typeof AuthenticatedForecastRoute
+  '/_authenticated/funil': typeof AuthenticatedFunilRoute
+  '/_authenticated/governanca': typeof AuthenticatedGovernancaRoute
+  '/_authenticated/kanban': typeof AuthenticatedKanbanRoute
+  '/_authenticated/mensal': typeof AuthenticatedMensalRoute
+  '/_authenticated/operacao': typeof AuthenticatedOperacaoRoute
+  '/_authenticated/reunioes': typeof AuthenticatedReunioesRoute
+  '/_authenticated/sdrs': typeof AuthenticatedSdrsRoute
+  '/_authenticated/semanal': typeof AuthenticatedSemanalRoute
+  '/_authenticated/sprints': typeof AuthenticatedSprintsRoute
+  '/_authenticated/': typeof AuthenticatedIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/acoes'
-    | '/calendario'
-    | '/checkpoint'
+    | '/auth'
     | '/closers'
-    | '/cockpit'
-    | '/fechamento-dia'
+    | '/crm'
     | '/forecast'
-    | '/indicadores'
-    | '/meta-junho'
-    | '/receita'
-    | '/riscos'
-    | '/rituais'
-    | '/s1'
-    | '/s2'
-    | '/s3'
-    | '/s4'
+    | '/funil'
+    | '/governanca'
+    | '/kanban'
+    | '/mensal'
+    | '/operacao'
+    | '/reunioes'
     | '/sdrs'
+    | '/semanal'
     | '/sprints'
-    | '/war-room'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/acoes'
-    | '/calendario'
-    | '/checkpoint'
+    | '/auth'
     | '/closers'
-    | '/cockpit'
-    | '/fechamento-dia'
+    | '/crm'
     | '/forecast'
-    | '/indicadores'
-    | '/meta-junho'
-    | '/receita'
-    | '/riscos'
-    | '/rituais'
-    | '/s1'
-    | '/s2'
-    | '/s3'
-    | '/s4'
+    | '/funil'
+    | '/governanca'
+    | '/kanban'
+    | '/mensal'
+    | '/operacao'
+    | '/reunioes'
     | '/sdrs'
+    | '/semanal'
     | '/sprints'
-    | '/war-room'
+    | '/'
   id:
     | '__root__'
-    | '/'
-    | '/acoes'
-    | '/calendario'
-    | '/checkpoint'
-    | '/closers'
-    | '/cockpit'
-    | '/fechamento-dia'
-    | '/forecast'
-    | '/indicadores'
-    | '/meta-junho'
-    | '/receita'
-    | '/riscos'
-    | '/rituais'
-    | '/s1'
-    | '/s2'
-    | '/s3'
-    | '/s4'
-    | '/sdrs'
-    | '/sprints'
-    | '/war-room'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/closers'
+    | '/_authenticated/crm'
+    | '/_authenticated/forecast'
+    | '/_authenticated/funil'
+    | '/_authenticated/governanca'
+    | '/_authenticated/kanban'
+    | '/_authenticated/mensal'
+    | '/_authenticated/operacao'
+    | '/_authenticated/reunioes'
+    | '/_authenticated/sdrs'
+    | '/_authenticated/semanal'
+    | '/_authenticated/sprints'
+    | '/_authenticated/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AcoesRoute: typeof AcoesRoute
-  CalendarioRoute: typeof CalendarioRoute
-  CheckpointRoute: typeof CheckpointRoute
-  ClosersRoute: typeof ClosersRoute
-  CockpitRoute: typeof CockpitRoute
-  FechamentoDiaRoute: typeof FechamentoDiaRoute
-  ForecastRoute: typeof ForecastRoute
-  IndicadoresRoute: typeof IndicadoresRoute
-  MetaJunhoRoute: typeof MetaJunhoRoute
-  ReceitaRoute: typeof ReceitaRoute
-  RiscosRoute: typeof RiscosRoute
-  RituaisRoute: typeof RituaisRoute
-  S1Route: typeof S1Route
-  S2Route: typeof S2Route
-  S3Route: typeof S3Route
-  S4Route: typeof S4Route
-  SdrsRoute: typeof SdrsRoute
-  SprintsRoute: typeof SprintsRoute
-  WarRoomRoute: typeof WarRoomRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/war-room': {
-      id: '/war-room'
-      path: '/war-room'
-      fullPath: '/war-room'
-      preLoaderRoute: typeof WarRoomRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sprints': {
-      id: '/sprints'
-      path: '/sprints'
-      fullPath: '/sprints'
-      preLoaderRoute: typeof SprintsRouteImport
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sdrs': {
-      id: '/sdrs'
-      path: '/sdrs'
-      fullPath: '/sdrs'
-      preLoaderRoute: typeof SdrsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/s4': {
-      id: '/s4'
-      path: '/s4'
-      fullPath: '/s4'
-      preLoaderRoute: typeof S4RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/s3': {
-      id: '/s3'
-      path: '/s3'
-      fullPath: '/s3'
-      preLoaderRoute: typeof S3RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/s2': {
-      id: '/s2'
-      path: '/s2'
-      fullPath: '/s2'
-      preLoaderRoute: typeof S2RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/s1': {
-      id: '/s1'
-      path: '/s1'
-      fullPath: '/s1'
-      preLoaderRoute: typeof S1RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/rituais': {
-      id: '/rituais'
-      path: '/rituais'
-      fullPath: '/rituais'
-      preLoaderRoute: typeof RituaisRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/riscos': {
-      id: '/riscos'
-      path: '/riscos'
-      fullPath: '/riscos'
-      preLoaderRoute: typeof RiscosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/receita': {
-      id: '/receita'
-      path: '/receita'
-      fullPath: '/receita'
-      preLoaderRoute: typeof ReceitaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/meta-junho': {
-      id: '/meta-junho'
-      path: '/meta-junho'
-      fullPath: '/meta-junho'
-      preLoaderRoute: typeof MetaJunhoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/indicadores': {
-      id: '/indicadores'
-      path: '/indicadores'
-      fullPath: '/indicadores'
-      preLoaderRoute: typeof IndicadoresRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/forecast': {
-      id: '/forecast'
-      path: '/forecast'
-      fullPath: '/forecast'
-      preLoaderRoute: typeof ForecastRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/fechamento-dia': {
-      id: '/fechamento-dia'
-      path: '/fechamento-dia'
-      fullPath: '/fechamento-dia'
-      preLoaderRoute: typeof FechamentoDiaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cockpit': {
-      id: '/cockpit'
-      path: '/cockpit'
-      fullPath: '/cockpit'
-      preLoaderRoute: typeof CockpitRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/closers': {
-      id: '/closers'
-      path: '/closers'
-      fullPath: '/closers'
-      preLoaderRoute: typeof ClosersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/checkpoint': {
-      id: '/checkpoint'
-      path: '/checkpoint'
-      fullPath: '/checkpoint'
-      preLoaderRoute: typeof CheckpointRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/calendario': {
-      id: '/calendario'
-      path: '/calendario'
-      fullPath: '/calendario'
-      preLoaderRoute: typeof CalendarioRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/acoes': {
-      id: '/acoes'
-      path: '/acoes'
-      fullPath: '/acoes'
-      preLoaderRoute: typeof AcoesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
+    '/_authenticated/': {
+      id: '/_authenticated/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sprints': {
+      id: '/_authenticated/sprints'
+      path: '/sprints'
+      fullPath: '/sprints'
+      preLoaderRoute: typeof AuthenticatedSprintsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/semanal': {
+      id: '/_authenticated/semanal'
+      path: '/semanal'
+      fullPath: '/semanal'
+      preLoaderRoute: typeof AuthenticatedSemanalRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sdrs': {
+      id: '/_authenticated/sdrs'
+      path: '/sdrs'
+      fullPath: '/sdrs'
+      preLoaderRoute: typeof AuthenticatedSdrsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/reunioes': {
+      id: '/_authenticated/reunioes'
+      path: '/reunioes'
+      fullPath: '/reunioes'
+      preLoaderRoute: typeof AuthenticatedReunioesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/operacao': {
+      id: '/_authenticated/operacao'
+      path: '/operacao'
+      fullPath: '/operacao'
+      preLoaderRoute: typeof AuthenticatedOperacaoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/mensal': {
+      id: '/_authenticated/mensal'
+      path: '/mensal'
+      fullPath: '/mensal'
+      preLoaderRoute: typeof AuthenticatedMensalRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/kanban': {
+      id: '/_authenticated/kanban'
+      path: '/kanban'
+      fullPath: '/kanban'
+      preLoaderRoute: typeof AuthenticatedKanbanRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/governanca': {
+      id: '/_authenticated/governanca'
+      path: '/governanca'
+      fullPath: '/governanca'
+      preLoaderRoute: typeof AuthenticatedGovernancaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/funil': {
+      id: '/_authenticated/funil'
+      path: '/funil'
+      fullPath: '/funil'
+      preLoaderRoute: typeof AuthenticatedFunilRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/forecast': {
+      id: '/_authenticated/forecast'
+      path: '/forecast'
+      fullPath: '/forecast'
+      preLoaderRoute: typeof AuthenticatedForecastRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/crm': {
+      id: '/_authenticated/crm'
+      path: '/crm'
+      fullPath: '/crm'
+      preLoaderRoute: typeof AuthenticatedCrmRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/closers': {
+      id: '/_authenticated/closers'
+      path: '/closers'
+      fullPath: '/closers'
+      preLoaderRoute: typeof AuthenticatedClosersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedClosersRoute: typeof AuthenticatedClosersRoute
+  AuthenticatedCrmRoute: typeof AuthenticatedCrmRoute
+  AuthenticatedForecastRoute: typeof AuthenticatedForecastRoute
+  AuthenticatedFunilRoute: typeof AuthenticatedFunilRoute
+  AuthenticatedGovernancaRoute: typeof AuthenticatedGovernancaRoute
+  AuthenticatedKanbanRoute: typeof AuthenticatedKanbanRoute
+  AuthenticatedMensalRoute: typeof AuthenticatedMensalRoute
+  AuthenticatedOperacaoRoute: typeof AuthenticatedOperacaoRoute
+  AuthenticatedReunioesRoute: typeof AuthenticatedReunioesRoute
+  AuthenticatedSdrsRoute: typeof AuthenticatedSdrsRoute
+  AuthenticatedSemanalRoute: typeof AuthenticatedSemanalRoute
+  AuthenticatedSprintsRoute: typeof AuthenticatedSprintsRoute
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedClosersRoute: AuthenticatedClosersRoute,
+  AuthenticatedCrmRoute: AuthenticatedCrmRoute,
+  AuthenticatedForecastRoute: AuthenticatedForecastRoute,
+  AuthenticatedFunilRoute: AuthenticatedFunilRoute,
+  AuthenticatedGovernancaRoute: AuthenticatedGovernancaRoute,
+  AuthenticatedKanbanRoute: AuthenticatedKanbanRoute,
+  AuthenticatedMensalRoute: AuthenticatedMensalRoute,
+  AuthenticatedOperacaoRoute: AuthenticatedOperacaoRoute,
+  AuthenticatedReunioesRoute: AuthenticatedReunioesRoute,
+  AuthenticatedSdrsRoute: AuthenticatedSdrsRoute,
+  AuthenticatedSemanalRoute: AuthenticatedSemanalRoute,
+  AuthenticatedSprintsRoute: AuthenticatedSprintsRoute,
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AcoesRoute: AcoesRoute,
-  CalendarioRoute: CalendarioRoute,
-  CheckpointRoute: CheckpointRoute,
-  ClosersRoute: ClosersRoute,
-  CockpitRoute: CockpitRoute,
-  FechamentoDiaRoute: FechamentoDiaRoute,
-  ForecastRoute: ForecastRoute,
-  IndicadoresRoute: IndicadoresRoute,
-  MetaJunhoRoute: MetaJunhoRoute,
-  ReceitaRoute: ReceitaRoute,
-  RiscosRoute: RiscosRoute,
-  RituaisRoute: RituaisRoute,
-  S1Route: S1Route,
-  S2Route: S2Route,
-  S3Route: S3Route,
-  S4Route: S4Route,
-  SdrsRoute: SdrsRoute,
-  SprintsRoute: SprintsRoute,
-  WarRoomRoute: WarRoomRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
