@@ -47,7 +47,7 @@ function KanbanPage() {
 
   const move = useMutation({
     mutationFn: async ({ id, coluna }: { id: string; coluna: string }) => {
-      const { error } = await supabase.from("kanban_cards").update({ coluna }).eq("id", id);
+      const { error } = await supabase.from("kanban_cards").update({ coluna: coluna as any }).eq("id", id);
       if (error) throw error;
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ["kanban_cards"] }),
