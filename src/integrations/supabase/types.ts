@@ -207,6 +207,7 @@ export type Database = {
           aprendizados: string | null
           closer_id: string | null
           conexoes: number
+          cpc: number
           created_at: string
           created_by: string | null
           data: string
@@ -231,6 +232,7 @@ export type Database = {
           aprendizados?: string | null
           closer_id?: string | null
           conexoes?: number
+          cpc?: number
           created_at?: string
           created_by?: string | null
           data: string
@@ -255,6 +257,7 @@ export type Database = {
           aprendizados?: string | null
           closer_id?: string | null
           conexoes?: number
+          cpc?: number
           created_at?: string
           created_by?: string | null
           data?: string
