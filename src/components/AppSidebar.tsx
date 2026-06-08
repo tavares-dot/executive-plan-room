@@ -8,6 +8,7 @@ import {
 type NavItem = { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean; group?: string };
 const nav: NavItem[] = [
   { to: "/", label: "Cockpit Executivo", icon: LayoutDashboard, exact: true, group: "Visão" },
+  { to: "/cockpit-diario", label: "Cockpit Diário", icon: LayoutDashboard, group: "Visão" },
   { to: "/funil", label: "Funil Comercial", icon: Filter, group: "Visão" },
   { to: "/forecast", label: "Forecast", icon: LineChart, group: "Visão" },
 
