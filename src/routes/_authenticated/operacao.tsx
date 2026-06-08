@@ -194,7 +194,7 @@ function OperacaoPage() {
               </Field>
             </div>
 
-            <div class‌Name="grid grid-cols-2 md:grid-cols-5 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
               <NumField label="Tentativas" v={draft.tentativas} on={(n) => setDraft({ ...draft, tentativas: n })} />
               <NumField label="Conexões" v={draft.conexoes} on={(n) => setDraft({ ...draft, conexoes: n })} />
               <NumField label="CPC" v={draft.cpc} on={(n) => setDraft({ ...draft, cpc: n })} />
