@@ -1,33 +1,29 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import logo from "@/assets/logo-legacy.svg";
 import {
-  LayoutDashboard, Target, Radio, CalendarRange, Users, Briefcase,
-  TrendingUp, Repeat, Gauge, LineChart, LayoutGrid, CalendarDays,
-  ListChecks, AlertTriangle, Activity, ClipboardCheck, Flag,
+  LayoutDashboard, Table2, CalendarRange, CalendarDays, Filter, LineChart,
+  Users, Briefcase, Video, KanbanSquare, Database, Shield, LayoutGrid,
 } from "lucide-react";
 
 type NavItem = { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean; group?: string };
 const nav: NavItem[] = [
-  { to: "/", label: "Resumo Executivo", icon: LayoutDashboard, exact: true, group: "Visão" },
-  { to: "/meta-junho", label: "Meta Junho", icon: Target, group: "Visão" },
-  { to: "/war-room", label: "War Room", icon: Radio, group: "Visão" },
-  { to: "/cockpit", label: "Cockpit Diário", icon: Activity, group: "Operação" },
-  { to: "/fechamento-dia", label: "Fechamento do Dia", icon: ClipboardCheck, group: "Operação" },
-  { to: "/checkpoint", label: "Checkpoint 13/06", icon: Flag, group: "Operação" },
-  { to: "/sprints", label: "Painel Sprints", icon: LayoutGrid, group: "Execução" },
-  { to: "/calendario", label: "Calendário", icon: CalendarDays, group: "Execução" },
-  { to: "/s1", label: "Sprint 1", icon: CalendarRange, group: "Execução" },
-  { to: "/s2", label: "Sprint 2", icon: CalendarRange, group: "Execução" },
-  { to: "/s3", label: "Sprint 3", icon: CalendarRange, group: "Execução" },
-  { to: "/s4", label: "Sprint 4", icon: CalendarRange, group: "Execução" },
-  { to: "/acoes", label: "Plano de Ação", icon: ListChecks, group: "Governança" },
-  { to: "/riscos", label: "Painel de Riscos", icon: AlertTriangle, group: "Governança" },
-  { to: "/sdrs", label: "SDRs", icon: Users, group: "Time" },
-  { to: "/closers", label: "Closers", icon: Briefcase, group: "Time" },
-  { to: "/receita", label: "Receita", icon: TrendingUp, group: "Performance" },
-  { to: "/rituais", label: "Rituais", icon: Repeat, group: "Performance" },
-  { to: "/indicadores", label: "Indicadores", icon: Gauge, group: "Performance" },
-  { to: "/forecast", label: "Forecast", icon: LineChart, group: "Performance" },
+  { to: "/", label: "Cockpit Executivo", icon: LayoutDashboard, exact: true, group: "Visão" },
+  { to: "/funil", label: "Funil Comercial", icon: Filter, group: "Visão" },
+  { to: "/forecast", label: "Forecast", icon: LineChart, group: "Visão" },
+
+  { to: "/operacao", label: "Operação Diária", icon: Table2, group: "Operação" },
+  { to: "/semanal", label: "Controle Semanal", icon: CalendarRange, group: "Operação" },
+  { to: "/mensal", label: "Controle Mensal", icon: CalendarDays, group: "Operação" },
+  { to: "/reunioes", label: "Reuniões Closers", icon: Video, group: "Operação" },
+
+  { to: "/sdrs", label: "SDR Ops", icon: Users, group: "Time" },
+  { to: "/closers", label: "Closer Ops", icon: Briefcase, group: "Time" },
+  { to: "/sprints", label: "Sprints", icon: LayoutGrid, group: "Time" },
+
+  { to: "/kanban", label: "Kanban", icon: KanbanSquare, group: "Execução" },
+  { to: "/crm", label: "CRM", icon: Database, group: "Execução" },
+
+  { to: "/governanca", label: "Governança", icon: Shield, group: "Admin" },
 ];
 
 export function AppSidebar() {
@@ -44,7 +40,7 @@ export function AppSidebar() {
       <div className="px-6 py-7 border-b border-sidebar-border">
         <img src={logo} alt="Legacy Executoria" className="h-8 w-auto" />
         <p className="mt-3 text-[10px] uppercase tracking-[0.18em] text-sidebar-foreground/60">
-          Plano Comercial · Jun 2026
+          Sales Ops Hub · v2.0
         </p>
       </div>
       <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-4">
