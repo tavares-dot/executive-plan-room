@@ -23,6 +23,7 @@ import { Route as AuthenticatedGovernancaRouteImport } from './routes/_authentic
 import { Route as AuthenticatedFunilRouteImport } from './routes/_authenticated/funil'
 import { Route as AuthenticatedForecastRouteImport } from './routes/_authenticated/forecast'
 import { Route as AuthenticatedCrmRouteImport } from './routes/_authenticated/crm'
+import { Route as AuthenticatedCockpitDiarioRouteImport } from './routes/_authenticated/cockpit-diario'
 import { Route as AuthenticatedClosersRouteImport } from './routes/_authenticated/closers'
 
 const AuthRoute = AuthRouteImport.update({
@@ -94,6 +95,12 @@ const AuthenticatedCrmRoute = AuthenticatedCrmRouteImport.update({
   path: '/crm',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCockpitDiarioRoute =
+  AuthenticatedCockpitDiarioRouteImport.update({
+    id: '/cockpit-diario',
+    path: '/cockpit-diario',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedClosersRoute = AuthenticatedClosersRouteImport.update({
   id: '/closers',
   path: '/closers',
@@ -104,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/auth': typeof AuthRoute
   '/closers': typeof AuthenticatedClosersRoute
+  '/cockpit-diario': typeof AuthenticatedCockpitDiarioRoute
   '/crm': typeof AuthenticatedCrmRoute
   '/forecast': typeof AuthenticatedForecastRoute
   '/funil': typeof AuthenticatedFunilRoute
@@ -119,6 +127,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/closers': typeof AuthenticatedClosersRoute
+  '/cockpit-diario': typeof AuthenticatedCockpitDiarioRoute
   '/crm': typeof AuthenticatedCrmRoute
   '/forecast': typeof AuthenticatedForecastRoute
   '/funil': typeof AuthenticatedFunilRoute
@@ -137,6 +146,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/closers': typeof AuthenticatedClosersRoute
+  '/_authenticated/cockpit-diario': typeof AuthenticatedCockpitDiarioRoute
   '/_authenticated/crm': typeof AuthenticatedCrmRoute
   '/_authenticated/forecast': typeof AuthenticatedForecastRoute
   '/_authenticated/funil': typeof AuthenticatedFunilRoute
@@ -156,6 +166,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/closers'
+    | '/cockpit-diario'
     | '/crm'
     | '/forecast'
     | '/funil'
@@ -171,6 +182,7 @@ export interface FileRouteTypes {
   to:
     | '/auth'
     | '/closers'
+    | '/cockpit-diario'
     | '/crm'
     | '/forecast'
     | '/funil'
@@ -188,6 +200,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/closers'
+    | '/_authenticated/cockpit-diario'
     | '/_authenticated/crm'
     | '/_authenticated/forecast'
     | '/_authenticated/funil'
@@ -307,6 +320,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCrmRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/cockpit-diario': {
+      id: '/_authenticated/cockpit-diario'
+      path: '/cockpit-diario'
+      fullPath: '/cockpit-diario'
+      preLoaderRoute: typeof AuthenticatedCockpitDiarioRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/closers': {
       id: '/_authenticated/closers'
       path: '/closers'
@@ -319,6 +339,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedClosersRoute: typeof AuthenticatedClosersRoute
+  AuthenticatedCockpitDiarioRoute: typeof AuthenticatedCockpitDiarioRoute
   AuthenticatedCrmRoute: typeof AuthenticatedCrmRoute
   AuthenticatedForecastRoute: typeof AuthenticatedForecastRoute
   AuthenticatedFunilRoute: typeof AuthenticatedFunilRoute
@@ -335,6 +356,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedClosersRoute: AuthenticatedClosersRoute,
+  AuthenticatedCockpitDiarioRoute: AuthenticatedCockpitDiarioRoute,
   AuthenticatedCrmRoute: AuthenticatedCrmRoute,
   AuthenticatedForecastRoute: AuthenticatedForecastRoute,
   AuthenticatedFunilRoute: AuthenticatedFunilRoute,

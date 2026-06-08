@@ -22,7 +22,7 @@ export const Route = createFileRoute("/_authenticated/operacao")({
 
 type Entry = {
   id: string; data: string; sdr_id: string | null; closer_id: string | null; sprint_id: string | null;
-  tentativas: number; conexoes: number; agendamentos: number; reunioes_realizadas: number; no_show: number;
+  tentativas: number; conexoes: number; cpc: number; agendamentos: number; reunioes_realizadas: number; no_show: number;
   negociacoes: number; propostas: number; fechamentos: number; receita: number;
   sla_medio_horas: number | null; leads_parados: number | null;
   observacoes: string | null; gargalos: string | null; aprendizados: string | null;
@@ -30,7 +30,7 @@ type Entry = {
 
 const blank = (): Partial<Entry> => ({
   data: new Date().toISOString().slice(0, 10),
-  tentativas: 0, conexoes: 0, agendamentos: 0, reunioes_realizadas: 0, no_show: 0,
+  tentativas: 0, conexoes: 0, cpc: 0, agendamentos: 0, reunioes_realizadas: 0, no_show: 0,
   negociacoes: 0, propostas: 0, fechamentos: 0, receita: 0,
 });
 
@@ -197,6 +197,7 @@ function OperacaoPage() {
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
               <NumField label="Tentativas" v={draft.tentativas} on={(n) => setDraft({ ...draft, tentativas: n })} />
               <NumField label="Conexões" v={draft.conexoes} on={(n) => setDraft({ ...draft, conexoes: n })} />
+              <NumField label="CPC" v={draft.cpc} on={(n) => setDraft({ ...draft, cpc: n })} />
               <NumField label="Agendamentos" v={draft.agendamentos} on={(n) => setDraft({ ...draft, agendamentos: n })} />
               <NumField label="Reuniões" v={draft.reunioes_realizadas} on={(n) => setDraft({ ...draft, reunioes_realizadas: n })} />
               <NumField label="No-Show" v={draft.no_show} on={(n) => setDraft({ ...draft, no_show: n })} />
